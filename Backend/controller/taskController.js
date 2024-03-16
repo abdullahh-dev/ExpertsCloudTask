@@ -29,6 +29,7 @@ const updateTask = async (req, res) => {
       { status: 'completed' },
       { where: { id: taskId } }
     );
+    console.log(updatedRowsCount);
     if (updatedRowsCount === 0) {
       return res.status(404).json({ message: 'Task not found' });
     }
@@ -39,4 +40,18 @@ const updateTask = async (req, res) => {
   }
 };
 
-module.exports = { getAllTasks, createTask, updateTask };
+const deleteTask = async (req, res) => {
+  const taskId = req.params.id;
+  try {
+    const deletedRowsCount = await Task.destroy({ where: { id: taskId } });
+    if (deletedRowsCount === 0) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+    return res.status(200).json({ message: 'Task deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+module.exports = { getAllTasks, createTask, updateTask, deleteTask };

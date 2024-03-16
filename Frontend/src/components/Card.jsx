@@ -1,6 +1,6 @@
 import React from 'react';
-import { handleComplete } from '../api/TaskApi';
-const Card = ({ todoList, completeStatus }) => {
+import { handleComplete, handleDelete } from '../api/TaskApi';
+const Card = ({ todoList, completeStatus, deletedTask }) => {
   return (
     <>
       {todoList.map((task) => {
@@ -30,13 +30,13 @@ const Card = ({ todoList, completeStatus }) => {
               task.status === 'pending'
                 ? 'border-yellow-500'
                 : 'border-emerald-500'
-            } p-5 rounded-sm w-[300px] shadow-md hover:shadow-2xl flex flex-col gap-6`}>
+            } p-5 rounded-sm w-[300px] shadow-md hover:shadow-2xl flex flex-col gap-4`}>
             <span className="text-[18px] text-[#c7c7c7bf]">Task#{task.id}</span>
             <span className={`text-2xl tracking-wider`}>{task.taskName}</span>
 
-            <span className="text-[12px]">
-              <p className="text-[12px]">
-                status:{' '}
+            <span className="text-[13px]">
+              <p>
+                <span className="font-medium">status:</span>{' '}
                 <span
                   className={`${
                     task.status === 'pending'
@@ -47,8 +47,13 @@ const Card = ({ todoList, completeStatus }) => {
                   {task.status}{' '}
                 </span>
               </p>
-              <p>created at: {createdTime}</p>
-              <p>updated at: {updatedTime}</p>
+              <p>
+                <span className="font-medium">created at :</span> {createdTime}
+              </p>
+              <p>
+                {' '}
+                <span className="font-medium">created at :</span> {updatedTime}
+              </p>
             </span>
             <span className="flex justify-end gap-2">
               <button
@@ -62,7 +67,12 @@ const Card = ({ todoList, completeStatus }) => {
                 Complete
               </button>
               <button
-                onClick={() => handleDelete(task.id)}
+                onClick={async () => {
+                  const delStatus = await handleDelete(task.id);
+                  if (delStatus) {
+                    deletedTask(task.id);
+                  }
+                }}
                 className="bg-red-600/70 text-[14px] w-[60px] p-[6px]  rounded-md">
                 Delete
               </button>

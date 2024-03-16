@@ -28,3 +28,10 @@ export const handleComplete = async (id) => {
   );
   return res.message;
 };
+export const handleDelete = async (id) => {
+  const taskId = id;
+  const res = await handleApiCall(() =>
+    axios.delete(`${BASEURL}/api/deleteTask/${taskId}`)
+  );
+  return res.message;
+};

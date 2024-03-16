@@ -25,6 +25,10 @@ const App = () => {
     });
   };
 
+  const deletedTask = (id) => {
+    setTodoList((prev) => prev.filter((task) => task.id !== id));
+  };
+
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
@@ -58,7 +62,11 @@ const App = () => {
         </span>
       </div>
       <div className="text-[white] flex justify-start flex-wrap gap-5 mt-16 text-[20px] ">
-        <Card todoList={todoList} completeStatus={completeStatus} />
+        <Card
+          todoList={todoList}
+          deletedTask={deletedTask}
+          completeStatus={completeStatus}
+        />
       </div>
     </div>
   );
