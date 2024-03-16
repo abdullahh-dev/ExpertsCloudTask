@@ -17,7 +17,6 @@ export const getAllTasks = async () => {
   const res = await handleApiCall(() =>
     axios.get(`${BASEURL}/api/getAllTasks`)
   );
-
   return res.data;
 };
 
