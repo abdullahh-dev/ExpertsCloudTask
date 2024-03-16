@@ -10,11 +10,11 @@ const getAllTasks = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
-  const { taskName, status } = req.body;
-  const expectedStatus = status || 'pending';
+  const { taskName } = req.body;
+
   let data;
   try {
-    data = await Task.create({ taskName, status: expectedStatus });
+    data = await Task.create({ taskName });
   } catch (err) {
     console.log(err);
   }
