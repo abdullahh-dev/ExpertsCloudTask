@@ -1,9 +1,9 @@
 import React from 'react';
-
-const Card = ({ handleComplete, handleDelete, todoList }) => {
+import { handleComplete } from '../api/TaskApi';
+const Card = ({ todoList, completeStatus }) => {
   return (
     <>
-      {todoList?.map((task) => {
+      {todoList.map((task) => {
         const createdTime = new Date(task.createdAt).toLocaleString('en-PK', {
           day: '2-digit',
           month: '2-digit',
@@ -52,7 +52,12 @@ const Card = ({ handleComplete, handleDelete, todoList }) => {
             </span>
             <span className="flex justify-end gap-2">
               <button
-                onClick={() => handleComplete(task.id)}
+                onClick={async () => {
+                  const status = await handleComplete(task.id);
+                  if (status) {
+                    completeStatus(task.id);
+                  }
+                }}
                 className="bg-emerald-600/70 text-[14px] w-[70px] p-[6px] rounded-md ">
                 Complete
               </button>

@@ -21,4 +21,22 @@ const createTask = async (req, res) => {
   res.status(200).send({ data });
 };
 
-module.exports = { getAllTasks, createTask };
+const updateTask = async (req, res) => {
+  const taskId = req.params.id;
+
+  try {
+    const [updatedRowsCount] = await Task.update(
+      { status: 'completed' },
+      { where: { id: taskId } }
+    );
+    if (updatedRowsCount === 0) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+    return res.status(200).json({ message: 'Task updated successfully' });
+  } catch (error) {
+    console.error('Error updating task:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+module.exports = { getAllTasks, createTask, updateTask };

@@ -7,20 +7,27 @@ const App = () => {
   const [newTask, setNewTask] = useState('');
 
   useEffect(() => {
-    getAllTasks().then((todos) => {
-      setTodoList(todos);
+    getAllTasks().then((tasks) => {
+      setTodoList(tasks);
     });
   }, []);
+
+  const completeStatus = (id) => {
+    const taskIndex = todoList.findIndex((task) => task.id === id);
+    setTodoList((prev) => {
+      const updatedTaskList = prev.map((task, index) => {
+        if (index === taskIndex) {
+          return { ...task, status: 'completed' };
+        }
+        return task;
+      });
+      return updatedTaskList;
+    });
+  };
 
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
-
-  const handleDelete = (id) => {
-    setTodoList(todoList.filter((task) => task.id !== id));
-  };
-
-  const handleComplete = () => {};
 
   return (
     <div className="lg:px-28 bg-[#212121] min-h-[100vh] h-[100%]  mx-auto p-5">
@@ -51,11 +58,7 @@ const App = () => {
         </span>
       </div>
       <div className="text-[white] flex justify-start flex-wrap gap-5 mt-16 text-[20px] ">
-        <Card
-          handleComplete={handleComplete}
-          handleDelete={handleDelete}
-          todoList={todoList}
-        />
+        <Card todoList={todoList} completeStatus={completeStatus} />
       </div>
     </div>
   );

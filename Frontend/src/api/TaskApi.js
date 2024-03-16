@@ -20,3 +20,11 @@ export const getAllTasks = async () => {
 
   return res.data;
 };
+
+export const handleComplete = async (id) => {
+  const taskId = id;
+  const res = await handleApiCall(() =>
+    axios.patch(`${BASEURL}/api/updateTask/${taskId}`)
+  );
+  return res.message;
+};
