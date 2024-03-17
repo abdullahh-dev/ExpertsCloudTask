@@ -13,7 +13,7 @@ const App = () => {
     const task = await addTask({ taskName: newTask });
     setTodoList((prev) => [...prev, task]);
   };
-  const { values, errors, handleChange, touched, handleSubmit } = useFormik({
+  const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
       task: '',
     },
@@ -45,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <div className="lg:px-28 bg-[#212121] min-h-[100vh] h-[100%]  mx-auto p-5">
+    <div className="lg:px-28 bg-[#181818] min-h-[100vh] h-[100%]  mx-auto p-5">
       <form onSubmit={handleSubmit}>
         <div className="flex items-center">
           <input
@@ -57,13 +57,13 @@ const App = () => {
           />
           <button
             type="submit"
-            className="text-[#070707] ml-2 px-5 h-10 b-0 rounded-sm  bg-[#ffffffaf]">
+            className="text-[#181818] ml-2 px-5 h-10 b-0 rounded-sm  bg-[#ffffffaf]">
             Add
           </button>
         </div>
-        <p className="text-red-600">{errors.task}</p>
+        <p className="text-red-600/70 mt-1 text-[13px]">{errors.task}</p>
       </form>
-      <div className="ml-[2px] text-[#c7c7c7bf] mt-5">
+      <div className="ml-[2px] text-[#c7c7c7bf] mt-2">
         <span className="border-l-2 px-2 border-yellow-500 leading-none">
           Pending
         </span>

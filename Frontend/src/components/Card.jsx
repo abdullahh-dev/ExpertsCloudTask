@@ -1,40 +1,27 @@
 import React from 'react';
 import { handleComplete, handleDelete } from '../api/TaskApi';
+import { timeConversion } from '../utils/timeCovert';
 const Card = ({ todoList, completeStatus, deletedTask }) => {
   return (
     <>
       {todoList.map((task) => {
-        const createdTime = new Date(task.createdAt).toLocaleString('en-PK', {
-          day: '2-digit',
-          month: '2-digit',
-          year: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          timeZone: 'Asia/Karachi',
-        });
-        const updatedTime = new Date(task.updatedAt).toLocaleString('en-PK', {
-          day: '2-digit',
-          month: '2-digit',
-          year: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          timeZone: 'Asia/Karachi',
-        });
+        const creation = timeConversion(task.createdAt);
+        const updation = timeConversion(task.updatedAt);
 
         return (
           <div
             key={task.id}
-            className={`bg-[#272727] border-l-2 ${
+            className={`bg-[#242424] border-l-2 ${
               task.status === 'pending'
                 ? 'border-yellow-500'
                 : 'border-emerald-500'
-            } p-5 rounded-sm w-[300px] shadow-md hover:shadow-2xl flex flex-col gap-4`}>
-            <span className="text-[18px] text-[#c7c7c7bf]">Task#{task.id}</span>
-            <span className={`text-2xl tracking-wider`}>{task.taskName}</span>
+            } px-3 py-3 rounded-sm w-[300px] shadow-md flex flex-col gap-2`}>
+            <span className="text-[13px] text-[#c7c7c7bf]">Task#{task.id}</span>
+            <span className={`text-2xl tracking-wider font-medium`}>
+              {task.taskName}
+            </span>
 
-            <span className="text-[13px]">
+            <span className="text-[12px] bg-[#181818] p-2 rounded-md">
               <p>
                 <span className="font-medium">status:</span>{' '}
                 <span
@@ -48,14 +35,14 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
                 </span>
               </p>
               <p>
-                <span className="font-medium">created at :</span> {createdTime}
+                <span className="font-medium">created at :</span> {creation}
               </p>
               <p>
                 {' '}
-                <span className="font-medium">created at :</span> {updatedTime}
+                <span className="font-medium">updated at :</span> {updation}
               </p>
             </span>
-            <span className="flex justify-end gap-2">
+            <span className="flex justify-end">
               <button
                 onClick={async () => {
                   const status = await handleComplete(task.id);
@@ -63,7 +50,7 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
                     completeStatus(task.id);
                   }
                 }}
-                className="bg-emerald-600/70 text-[14px] w-[70px] p-[6px] rounded-md ">
+                className="bg-emerald-600/70 text-[12px] w-[60px] p-[4px] rounded-md ">
                 Complete
               </button>
               <button
@@ -73,7 +60,7 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
                     deletedTask(task.id);
                   }
                 }}
-                className="bg-red-600/70 text-[14px] w-[60px] p-[6px]  rounded-md">
+                className="bg-red-600/70 ml-1 text-[12px] w-[60px] p-[4px] rounded-md">
                 Delete
               </button>
             </span>
