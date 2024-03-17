@@ -4,7 +4,7 @@ const BASEURL = import.meta.env.VITE_BASE_URL;
 
 export const addTask = async (taskData) => {
   const res = await handleApiCall(() =>
-    axios.post(`${BASEURL}/api/createTask`, taskData, {
+    axios.post(`${BASEURL}/createTask`, taskData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -14,16 +14,14 @@ export const addTask = async (taskData) => {
 };
 
 export const getAllTasks = async () => {
-  const res = await handleApiCall(() =>
-    axios.get(`${BASEURL}/api/getAllTasks`)
-  );
+  const res = await handleApiCall(() => axios.get(`${BASEURL}/getAllTasks`));
   return res.data;
 };
 
 export const handleComplete = async (id) => {
   const taskId = id;
   const res = await handleApiCall(() =>
-    axios.patch(`${BASEURL}/api/updateTask/${taskId}`)
+    axios.patch(`${BASEURL}/updateTask/${taskId}`)
   );
   return res;
 };
@@ -31,7 +29,7 @@ export const handleComplete = async (id) => {
 export const handleDelete = async (id) => {
   const taskId = id;
   const res = await handleApiCall(() =>
-    axios.delete(`${BASEURL}/api/deleteTask/${taskId}`)
+    axios.delete(`${BASEURL}/deleteTask/${taskId}`)
   );
   return res.message;
 };
