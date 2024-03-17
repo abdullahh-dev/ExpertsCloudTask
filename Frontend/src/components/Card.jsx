@@ -5,8 +5,8 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
   return (
     <>
       {todoList.map((task) => {
-        const creation = timeConversion(task.createdAt);
-        const updation = timeConversion(task.updatedAt);
+        const createdTime = timeConversion(task.createdAt);
+        const updatedTime = timeConversion(task.updatedAt);
 
         return (
           <div
@@ -45,9 +45,13 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
             <span className="flex justify-end">
               <button
                 onClick={async () => {
+                  if (task.status === 'completed') {
+                    alert('Task Already Completed');
+                    return;
+                  }
                   const status = await handleComplete(task.id);
-                  if (status) {
-                    completeStatus(task.id);
+                  if (status.message == 'Task updated successfully') {
+                    completeStatus(task.id, status.updatedTask.updatedAt);
                   }
                 }}
                 className="bg-emerald-600/70 text-[12px] w-[60px] p-[4px] rounded-md ">

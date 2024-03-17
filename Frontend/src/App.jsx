@@ -27,12 +27,16 @@ const App = () => {
     });
   }, []);
 
-  const completeStatus = (id) => {
+  const completeStatus = (id, updatedTime) => {
     const taskIndex = todoList.findIndex((task) => task.id === id);
     setTodoList((prev) => {
       const updatedTaskList = prev.map((task, index) => {
         if (index === taskIndex) {
-          return { ...task, status: 'completed' };
+          return {
+            ...task,
+            status: 'completed',
+            updatedAt: updatedTime,
+          };
         }
         return task;
       });

@@ -25,8 +25,9 @@ export const handleComplete = async (id) => {
   const res = await handleApiCall(() =>
     axios.patch(`${BASEURL}/api/updateTask/${taskId}`)
   );
-  return res.message;
+  return res;
 };
+
 export const handleDelete = async (id) => {
   const taskId = id;
   const res = await handleApiCall(() =>
