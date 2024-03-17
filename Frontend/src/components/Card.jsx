@@ -15,7 +15,7 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
               task.status === 'pending'
                 ? 'border-yellow-500'
                 : 'border-emerald-500'
-            } px-3 py-3 rounded-sm w-[300px] shadow-md flex flex-col gap-2`}>
+            } px-3 py-3 rounded-sm max-w-[100%] w-[100%] md:w-[300px] lg:[300px] shadow-md flex flex-col gap-2`}>
             <span className="text-[13px] text-[#c7c7c7bf]">Task#{task.id}</span>
             <span className={`text-2xl tracking-wider font-medium`}>
               {task.taskName}
@@ -35,23 +35,24 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
                 </span>
               </p>
               <p>
-                <span className="font-medium">created at :</span> {creation}
+                <span className="font-medium">created at :</span> {createdTime}
               </p>
               <p>
                 {' '}
-                <span className="font-medium">updated at :</span> {updation}
+                <span className="font-medium">updated at :</span> {updatedTime}
               </p>
             </span>
             <span className="flex justify-end">
               <button
                 onClick={async () => {
                   if (task.status === 'completed') {
-                    alert('Task Already Completed');
+                    alert('You already completed this task');
                     return;
                   }
                   const status = await handleComplete(task.id);
-                  if (status.message == 'Task updated successfully') {
-                    completeStatus(task.id, status.updatedTask.updatedAt);
+                  const { message, updatedTask } = status;
+                  if (message == 'Task updated successfully') {
+                    completeStatus(task.id, updatedTask.updatedAt);
                   }
                 }}
                 className="bg-emerald-600/70 text-[12px] w-[60px] p-[4px] rounded-md ">

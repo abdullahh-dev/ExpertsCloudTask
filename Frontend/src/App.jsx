@@ -26,6 +26,12 @@ const App = () => {
       setTodoList(tasks);
     });
   }, []);
+  const pendingTasks = [
+    ...todoList.filter((task) => task.status === 'pending'),
+  ];
+  const completedTasks = [
+    ...todoList.filter((task) => task.status === 'completed'),
+  ];
 
   const completeStatus = (id, updatedTime) => {
     const taskIndex = todoList.findIndex((task) => task.id === id);
@@ -67,12 +73,13 @@ const App = () => {
         </div>
         <p className="text-red-600/70 mt-1 text-[13px]">{errors.task}</p>
       </form>
-      <div className="ml-[2px] text-[#c7c7c7bf] mt-2">
-        <span className="border-l-2 px-2 border-yellow-500 leading-none">
-          Pending
+      <div className="ml-[2px] flex items-center gap-4 text-[#c7c7c7bf] mt-2">
+        <span>All - {todoList.length} </span>
+        <span className="border-l-2 pl-2 border-yellow-500 leading-none">
+          Pending - {pendingTasks.length}
         </span>
-        <span className="ml-5 border-l-2 px-2 border-emerald-500 leading-none">
-          Completed
+        <span className="border-l-2 pl-2 border-emerald-500 leading-none">
+          Completed - {completedTasks.length}
         </span>
       </div>
       <div className="text-[white] flex justify-start flex-wrap gap-5 mt-16 text-[20px] ">
