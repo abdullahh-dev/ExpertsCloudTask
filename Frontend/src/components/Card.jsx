@@ -1,5 +1,5 @@
 import React from 'react';
-import { handleComplete, handleDelete } from '../api/TaskApi';
+import { handleComplete, handleDelete } from '../api';
 import { timeConversion } from '../utils/timeCovert';
 const Card = ({ todoList, completeStatus, deletedTask }) => {
   return (
