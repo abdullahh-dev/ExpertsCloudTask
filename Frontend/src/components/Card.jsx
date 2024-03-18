@@ -1,6 +1,9 @@
 import React from 'react';
 import { handleComplete, handleDelete } from '../api';
 import { timeConversion } from '../utils/timeCovert';
+import { Flip, Slide, Zoom, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Card = ({ todoList, completeStatus, deletedTask }) => {
   return (
     <>
@@ -15,9 +18,9 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
               task.status === 'pending'
                 ? 'border-yellow-500'
                 : 'border-emerald-500'
-            } px-3 py-3 rounded-sm max-w-[100%] w-[100%] md:w-[300px] lg:[300px] shadow-md flex flex-col gap-2`}>
+            } px-3 py-3 rounded-md w-[300px] md:w-[300px] lg:[300px] shadow-md flex flex-col gap-3`}>
             <span className="text-[13px] text-[#c7c7c7bf]">Task#{task.id}</span>
-            <span className={`text-2xl tracking-wider font-medium`}>
+            <span className={`text-2xl  tracking-wider font-bold`}>
               {task.taskName}
             </span>
 
@@ -31,7 +34,7 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
                       : 'text-emerald-500'
                   }`}>
                   {' '}
-                  {task.status}{' '}
+                  {task.status}
                 </span>
               </p>
               <p>
@@ -46,7 +49,9 @@ const Card = ({ todoList, completeStatus, deletedTask }) => {
               <button
                 onClick={async () => {
                   if (task.status === 'completed') {
-                    alert('You already completed this task');
+                    toast.info('Task already completed', {
+                      theme: 'colored',
+                    });
                     return;
                   }
                   const status = await handleComplete(task.id);

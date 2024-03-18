@@ -3,6 +3,7 @@ import Card from './components/Card';
 import { getAllTasks, addTask } from './api/TaskApi';
 import { useFormik } from 'formik';
 import { basicSchema } from '../Schema';
+import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
@@ -12,6 +13,7 @@ const App = () => {
     const newTask = values.task;
     const task = await addTask({ taskName: newTask });
     setTodoList((prev) => [...prev, task]);
+    toast('Task Added', { theme: 'dark' });
   };
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -48,10 +50,14 @@ const App = () => {
       });
       return updatedTaskList;
     });
+    toast.success('Task completed', {
+      theme: 'colored',
+    });
   };
 
   const deletedTask = (id) => {
     setTodoList((prev) => prev.filter((task) => task.id !== id));
+    toast.error('Task deleted successfully', { theme: 'colored' });
   };
 
   return (
@@ -87,6 +93,18 @@ const App = () => {
           todoList={todoList}
           deletedTask={deletedTask}
           completeStatus={completeStatus}
+        />
+        <ToastContainer
+          style={{ fontSize: '16px', width: '300px' }}
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          draggable
+          pauseOnHover
+          transition:Bounce
         />
       </div>
     </div>
