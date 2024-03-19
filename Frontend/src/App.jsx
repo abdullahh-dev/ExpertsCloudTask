@@ -7,7 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
-
   const onSubmit = async (values, actions) => {
     actions.resetForm();
     const newTask = values.task;
