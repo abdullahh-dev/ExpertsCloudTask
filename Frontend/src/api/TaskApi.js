@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { handleApiCall } from '../utils/helpers';
-const BASEURL = import.meta.env.VITE_BASE_URL;
-
+const BASEURL = 'https://expertscloudtask.onrender.com/api/tasks';
+// import.meta.env.VITE_BASE_URL
 export const addTask = async (taskData) => {
   const res = await handleApiCall(() =>
     axios.post(`${BASEURL}/createTask`, taskData, {

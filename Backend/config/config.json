@@ -18,6 +18,7 @@
     "password": "PdHrbxhnFZ",
     "database": "sql6692773",
     "host": "sql6.freesqldatabase.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": "3306"
   }
 }
