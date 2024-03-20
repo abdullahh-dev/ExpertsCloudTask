@@ -6,7 +6,7 @@ const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const PORT = process.env.PORT;
-app.use(cors());
+app.use(cors({ origin: 'https://experts-cloud-task.vercel.app' }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
