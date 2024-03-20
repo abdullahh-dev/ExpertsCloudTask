@@ -35,12 +35,12 @@ There are three main folders
 - api
 - Utils
 
-- In the **component** folder, I have placed the card UI Logn that displays each todo item with its metadata 
+- In the **component** folder, I have placed the card UI Logic that displays each todo item with its metadata 
 
 - In the **Api** folder, I have written down all the functions that are interacting with the backend through an API.
 
-- In **Utils** I wrote down the reusable code like helpers and time Convert, the helper basically take the
-functions that are communicating with the backend and enclosed them in try-catch block for error handling
+- In **Utils** I wrote down the reusable code like helpers and time Convert, the helper take the
+functions that are communicating with the backend and enclosed them in a try-catch block for error handling
 
 
 #### Backend
@@ -54,8 +54,7 @@ In the backend, I have created separate folders for the controller, routes, conf
 - In the controller folder, all the logic to handle HTTP requests and interact with the Model to perform CRUD operation.
 - In the config folder, there's a config.json file that contains info about the database in key-value pair, set the credentials values according to ur database setting.
 
-In config file of backend change the developement variable defiend in key value pair as your lcoal Mysql Server if deployed doenst run..
-
+In the config file of the backend change the development variable defined in the key-value pair as your local Mysql Server if the deployed link doesn't work...
 ## CRUD Operation
 
 **Create**: Added/Inserted new Tasks by clicking the Add button  
@@ -65,7 +64,7 @@ In config file of backend change the developement variable defiend in key value 
 
 ## API EndPoints for local host environment
 
-https://expertscloudtask.onrender.com/api/tasks/getAllTasks --- Will show you all the tasks added in ou db
+https://expertscloudtask.onrender.com/api/tasks/getAllTasks --- Will show you all the tasks added to the db
 
 ## Deployment Links
 
