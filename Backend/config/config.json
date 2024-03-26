@@ -14,9 +14,9 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "sql6692773",
-    "password": "PdHrbxhnFZ",
-    "database": "sql6692773",
+    "username": "sql6694466",
+    "password": "PKiwbbzGG6",
+    "database": "sql6694466",
     "host": "sql6.freesqldatabase.com",
     "dialect": "mysql",
     "port": "3306"
